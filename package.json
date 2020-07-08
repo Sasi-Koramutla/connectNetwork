@@ -1,0 +1,35 @@
+{
+  "name": "connectnetwork",
+  "version": "1.0.0",
+  "description": "application to connect with your network",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sasi-Koramutla/connectNetwork.git"
+  },
+  "keywords": [
+    "connect",
+    "network",
+    "express",
+    "app"
+  ],
+  "author": "sasi koramutla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sasi-Koramutla/connectNetwork/issues"
+  },
+  "homepage": "https://github.com/Sasi-Koramutla/connectNetwork#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.9.22"
+  }
+}
