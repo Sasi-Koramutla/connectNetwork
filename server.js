@@ -15,6 +15,7 @@ const app = express();
 // middleware to help with the form submission
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
+app.use(express.static('public'));
 
 //session usage
 app.use(
