@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 //dotenv, port, URI
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
-const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost/'+ `networkskapp`;
+const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost:27017/'+ 'networkskapp';
 const session = require('express-session');
 
 const app = express();
@@ -27,7 +27,12 @@ app.use(
   );
   
 // mongoose connection logic
-  mongoose.connect(mongodbURI, { useNewUrlParser: true} );
+  mongoose.connect(mongodbURI, { useNewUrlParser: true}, (err, res) => {
+    if (err) {
+    console.log ('ERROR connecting to: ' + mongodbURI + '. ' + err);
+    } else {
+    console.log ('Succeeded connected to: ' + mongodbURI);
+    }});
   mongoose.connection.once('open', ()=> {
       console.log('connected to mongo');
   });
