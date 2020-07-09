@@ -6,7 +6,7 @@ const methodOverride = require('method-override');
 
 //dotenv, port, URI
 require('dotenv').config();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost/'+ `networkskapp`;
 const session = require('express-session');
 
@@ -27,7 +27,7 @@ app.use(
   );
   
 // mongoose connection logic
-  mongoose.connect(mongodbURI, { useNewUrlParser: true, useUnifiedTopology: true } );
+  mongoose.connect(mongodbURI, { useNewUrlParser: true} );
   mongoose.connection.once('open', ()=> {
       console.log('connected to mongo');
   });
