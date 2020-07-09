@@ -1,13 +1,14 @@
-//express, mongoose, methodOverride, session
+//express, mongoose, methodOverride
 const express = require("express");
 const mongoose = require('mongoose');
 const methodOverride = require('method-override');
-const session = require('express-session');
+
 
 //dotenv, port, URI
 require('dotenv').config();
 const PORT = process.env.PORT;
-const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost/'+ `networkskapp`;;
+const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost/'+ `networkskapp`;
+const session = require('express-session');
 
 const app = express();
 
