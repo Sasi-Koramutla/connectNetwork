@@ -21,7 +21,7 @@ router.get('/', isAuthenticated, (req, res) =>{
         currentUser: req.session.currentUser
       })
     })
-  })
+  });
 
 /* // new
 router.get('/new', isAuthenticated, (req, res) => {
