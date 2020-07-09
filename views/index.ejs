@@ -13,14 +13,14 @@
       <h1 style="font-size:90px;">Available Connections</h1>
      </div>
      <form action="/sessions?_method=DELETE" method="POST">
-      <input type="submit" value="Log Out" class="btn btn-primary />
+      <input type="submit" value="Log Out" class="btn btn-primary" />
     </form>
     </div>
 
     <div style="margin-left:200px;">
         <% for (let i = 0; i < users.length; i++) { %>
           <% if (users[i].id != currentUser.id) { %>
-          <div class="row">
+          <div class="row" style="margin:5px; border: 1px solid grey;">
             <%= users[i].firstName %> <br>
             <%= users[i].lastName %> <br>
             <%= users[i].username %> <br>
