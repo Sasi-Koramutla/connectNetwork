@@ -7,7 +7,7 @@ const session = require('express-session');
 //dotenv, port, URI
 require('dotenv').config();
 const PORT = process.env.PORT;
-const mongodbURI = process.env.MONGODBURI;
+const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost/'+ `networkskapp`;;
 
 const app = express();
 
