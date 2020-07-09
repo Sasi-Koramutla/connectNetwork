@@ -9,7 +9,9 @@ require('dotenv').config();
 const PORT = process.env.PORT;
 const mongodbURI = process.env.MONGODBURI;
 
-//// middleware to help with the form submission
+const app = express();
+
+// middleware to help with the form submission
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
 
@@ -31,11 +33,11 @@ app.use(
 
 //Connections controller
 const connectionsController = require("./controllers/connections.js");
-app.use("/connections", connectionsController);
+app.use("/connections", connectionsController); 
 
 // User controller
 const userController = require('./controllers/users.js');
-app.use('/users', userController);
+app.use('/users', userController); 
 
 // Session controller
 const sessionController = require('./controllers/sessions.js');
@@ -44,7 +46,7 @@ app.use('/sessions', sessionController);
 
 //get route
 app.get("/", (req, res) => {
-    res.send("At the root!");
+    res.render("welcome.ejs");
 });
 // the app running the server
 app.listen(PORT, () => {
