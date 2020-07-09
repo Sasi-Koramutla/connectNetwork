@@ -7,7 +7,7 @@ const methodOverride = require('method-override');
 //dotenv, port, URI
 require('dotenv').config();
 const PORT = process.env.PORT || 3000;
-const mongodbURI = process.env.MONGODBURI || 'mongodb://localhost/'+ 'networkskapp';
+const mongodbURI = process.env.MONGODB_URI || 'mongodb://localhost/'+ 'networkskapp';
 const session = require('express-session');
 
 const app = express();
