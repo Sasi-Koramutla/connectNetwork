@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/users');
 const allUsers = require('../models/users');
 const sessionRouter = express.Router();
+sessionRouter.use(express.static('public'));
 
 sessionRouter.get('/new', (req, res) => {
     res.render('sessions/new.ejs', {
