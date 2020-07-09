@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>YouConnect </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/style.css">
+   <!--  <link rel="stylesheet" href="/css/style.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
@@ -17,13 +17,16 @@
     </form>
     </div>
 
-    <div style="margin-left:200px;">
+    <div style="margin:0px 100px 0px 100px;">
         <% for (let i = 0; i < users.length; i++) { %>
           <% if (users[i].id != currentUser.id) { %>
           <div class="row" style="margin:5px; border: 1px solid grey;">
             <%= users[i].firstName %> <br>
             <%= users[i].lastName %> <br>
-            <%= users[i].username %> <br>
+           <div style="margin-left:25px"> <a href="/users/<%= users[i].id %>">
+                  <%= users[i].username %> 
+                </a>
+           </div>
 
           </div>
         <% } %>
