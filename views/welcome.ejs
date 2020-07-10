@@ -8,15 +8,63 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
+      <div><h2 style="color:white;">
+        Howdy!
+       </h1>
+      </div>
+      <div>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active mr-sm-2">
+            <form action="/sessions" method="POST"><div style="display: flex; flex-direction: row; align-items: flex-end; flex-wrap: wrap;">
+              <div class= "mr-sm-2" style="display: flex; flex-direction: column; align-items: flex-start; flex-wrap: wrap;">
+                <label style="color:white;"> Username </label> 
+                <input class="form-control" type="text" name="username"/>
+              </div>
+              <div class= "mr-sm-2" style="display: flex; flex-direction: column; align-items: flex-start; flex-wrap: wrap;">
+                <label style="color:white;"> Password </label> 
+                <input class="form-control" type="password" name="password"/>
+              </div>
+          
+              <input type="submit" value="Log in" class="btn btn-light"/>
+            </div>
+            </form> 
+          </li>
+        </ul>
+      </div>
+    </div>
+    </nav>
     <div class="jumbotron" style="align-items:center;">
      <div class="row" style="text-align:center; margin-left:25%">
-      <h1 style="font-size:90px;">YouConnect</h1>
+      <h1>YouConnect</h1>
+
      </div>
     </div>
 
     <div>
-      <a href="/sessions/new"  class="btn btn-primary" style="margin-left: 25px; height:40px"> Login</a> 
-      <a href="/users/new"  class="btn btn-primary" style="margin-left: 25px; height:40px"> Sign Up</a> 
+
+      <form action="/users" method="POST" style="width:50%; margin-left:25%">
+        <div class="form-group">
+            <input type="text" placeholder="First name" name="firstName">
+        </div>
+        <div class="form-group">
+            <input type="text"  placeholder="Last name" name="lastName">
+        </div>
+        <div class="form-group">
+             <input type="text" name="username" placeholder="email (Username)"/><br/>
+        </div>
+        <div class="form-group"> 
+            <input type="password" name="password" placeholder="Password"/><br/>
+        </div>
+        <div class="form-group">
+            <input type="number" name="zipcode" placeholder="Zipcode (optional)"/><br/>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Sign up"/>
+        </div>
+  
+      </form>
     </div>
 
  </body>

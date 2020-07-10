@@ -6,7 +6,9 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     username: {type: String, required: true, uniqe: true},
     zipcode: {type: Number},
-    userConnections: [{connectionId: {type: String}, messages: {type: Array}}]
+    userConnections: [{connectionId: {type: String}, messages: {type: Array}}],
+    bmonth: { type: String},
+    bday: { type: String}
 },{timestamps: true});
 
 const User = mongoose.model('User', userSchema);

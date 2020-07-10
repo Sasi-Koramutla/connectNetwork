@@ -8,30 +8,60 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
+        <div><h2 style="color:white;">
+          Howdy <%= currentUser.firstName %>, 
+           <%= currentUser.lastName %>!
+         </h2>
+        </div>
+        <div>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active mr-sm-2">
+              <a href="/users/<%= currentUser.id %>/edit" class="btn btn-light" >Edit Profile  </a>
+            </li>
+            <li class="nav-item active mr-sm-2">
+              <a href="#" class="btn btn-light" >Settings  </a>
+            </li>
+            <li class="nav-item">
+              <form action="/sessions?_method=DELETE" method="POST">
+                <input type="submit" value="Log Out" class="btn btn-light" />
+              </form>
+            </li>
+          </ul>
+        </div>
+        
+<!--         <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Connection Name" aria-label="Search">
+          <button class="btn btn-light" type="submit">Find</button>
+        </form> -->
+      </div>
+    </nav>
     <div class="jumbotron" style="align-items:center;">
-     <div class="row" style="text-align:center; margin-left:25%">
-      <h1 style="font-size:90px;">Available Connections</h1>
-     </div>
-     <form action="/sessions?_method=DELETE" method="POST">
-      <input type="submit" value="Log Out" class="btn btn-primary" />
-    </form>
+     <div style="text-align:center;">
+      <h1>Available Connections</h1><br>
+     </div> 
+  </div>
+  <div style="margin:0px 100px 0px 100px;">
+    <% for (let i = 0; i < users.length; i++) { %>
+      <% if (users[i].id != currentUser.id) { %>
+    <div class="row" style="margin:5px; border: 1px solid grey;">
+        <%= users[i].firstName %> <br>
+        <%= users[i].lastName %> <br>
+      <div style="margin-left:25px"> <a href="/users/<%= users[i].id %>">
+              <%= users[i].username %> 
+            </a>
+      </div>
+      <form action="/users?_method=EDIT" method="POST" style="width:50%; margin-left:25%">
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Add to Network"/>
+        </div>
+      </form>
     </div>
-
-    <div style="margin:0px 100px 0px 100px;">
-        <% for (let i = 0; i < users.length; i++) { %>
-          <% if (users[i].id != currentUser.id) { %>
-          <div class="row" style="margin:5px; border: 1px solid grey;">
-            <%= users[i].firstName %> <br>
-            <%= users[i].lastName %> <br>
-           <div style="margin-left:25px"> <a href="/users/<%= users[i].id %>">
-                  <%= users[i].username %> 
-                </a>
-           </div>
-
-          </div>
-        <% } %>
       <% } %>
-    </div>
+    <% } %>
+  </div>
 
  </body>
 </html>
