@@ -47,7 +47,7 @@
     <% for (let i = 0; i < users.length; i++) { %>
       <% if (users[i].id != currentUser.id) { %>
     <div class="card" style="width:200px; margin:5px; display:flex; flex-direction: column; justify-content: center; align-items:center;">
-      <img class="img img-fluid" style="width:100px; height:100px" src="<%= users[i].img %>" onerror=this.src="img/people.png">
+      <img class="img img-fluid" style="width:100px; height:100px; border-radius:50px; margin-top:10px" src="<%= users[i].img %>" onerror=this.src="img/people.png">
         <%= users[i].firstName %> <br>
         <%= users[i].lastName %> <br>
       <div> <a href="/users/<%= users[i].id %>">
