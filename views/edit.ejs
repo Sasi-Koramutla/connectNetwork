@@ -17,24 +17,27 @@
     <div>
       <form action="/users/<%=user.id%>?_method=PUT" method="POST" style="width:50%; margin-left:25%">
         <div class="form-group">
-            <input type="text" value="<%=user.firstName%>" name="firstName">
+            first name<input type="text" value="<%=user.firstName%>" name="firstName">
         </div>
         <div class="form-group">
-            <input type="text"  value="<%=user.lastName%>" name="lastName">
+            last name<input type="text"  value="<%=user.lastName%>" name="lastName">
         </div>
         <div class="form-group">
             <fieldset disabled>
-             <input type="text" name="username" value="<%=user.username%>"/><br/>
+             username <input type="text" name="username" value="<%=user.username%>"/><br/>
             </fieldset>
         </div>
         <div class="form-group"> 
             <fieldset disabled>
-                <input type="password" name="password" placeholder="..........."/><br/>
+               password <input type="password" name="password" placeholder="..........."/><br/>
             </fieldset>
 
         </div>
         <div class="form-group">
-            <input type="number" name="zipcode" value="<%=user.zip%>"/><br/>
+           image link<input type="text" name="img" value="<%=user.img%>"/><br/>
+        </div>
+        <div class="form-group">
+            zip <input type="number" name="zipcode" value="<%=user.zip%>"/><br/>
         </div>
         <div class="form-group">
             <div>Birthday</div>

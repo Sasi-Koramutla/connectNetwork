@@ -43,17 +43,18 @@
       <h1>Available Connections</h1><br>
      </div> 
   </div>
-  <div style="margin:0px 100px 0px 100px;">
+  <div style="margin:0px 100px 0px 100px; display:flex; flex-wrap: wrap; flex-direction: row; justify-content: center; align-items:center;">
     <% for (let i = 0; i < users.length; i++) { %>
       <% if (users[i].id != currentUser.id) { %>
-    <div class="row" style="margin:5px; border: 1px solid grey;">
+    <div class="card" style="width:200px; margin:5px; display:flex; flex-direction: column; justify-content: center; align-items:center;">
+      <img class="img img-fluid" style="width:100px; height:100px" src="<%= users[i].img %>" onerror=this.src="img/people.png">
         <%= users[i].firstName %> <br>
         <%= users[i].lastName %> <br>
-      <div style="margin-left:25px"> <a href="/users/<%= users[i].id %>">
+      <div> <a href="/users/<%= users[i].id %>">
               <%= users[i].username %> 
             </a>
       </div>
-      <form action="/users?_method=EDIT" method="POST" style="width:50%; margin-left:25%">
+      <form action="/users?_method=EDIT" method="POST">
         <div class="form-group">
             <input class="btn btn-primary" type="submit" value="Add to Network"/>
         </div>

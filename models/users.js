@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema({
     username: {type: String, required: true, uniqe: true},
     zipcode: {type: Number},
     userConnections: [{connectionId: {type: String}, messages: {type: Array}}],
+    img: { type: String},
     bmonth: { type: String},
     bday: { type: String}
 },{timestamps: true});
