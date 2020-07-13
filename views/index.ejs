@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
    <!--  <link rel="stylesheet" href="/css/style.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
   </head>
@@ -14,8 +15,7 @@
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
         <div><h2 style="color:white;">
-          Howdy <%= currentUser.firstName %>, 
-           <%= currentUser.lastName %>!
+          Howdy <%= currentUser.firstName %>!
          </h2>
         </div>
         <div>
@@ -53,12 +53,15 @@
   </div>
   <div style="margin:0% 10% 0px 10%; display:flex; flex-wrap: wrap; flex-direction: row; justify-content: center; align-items:baseline;width:80%">
 
-    <table id="connections" style="width:90%;">
-    <thead><th></th></thead>
+    <table class="table table-hover" id="connections" style="width:100%;">
+      <thead> <th> Connection Details</th> 
+               <th> Network Groups </th>
+              <th> Actions </th>
+      </thead>
   <% for (let i = 0; i < users.length; i++) { %>
       <% if (users[i].id != currentUser.id) { %>
-      <tr style="border-top: 1px solid grey; width:90%; ">
-        <td style="width:100%; margin:5px;  display:flex; flex-direction: row; justify-content: center; align-items:center">      
+      <tr>
+        <td style="display:flex; justify-content: flex-start; align-items:center">      
           <img class="img img-fluid" style="width:100px; height:100px; border-radius:50px; margin-top:10px" src="<%= users[i].img %>" onerror=this.src="img/people.png">
             <div>  <%= users[i].firstName %> | </div>
               <div style="margin-left:5px"> <%= users[i].lastName %> |  </div>
@@ -67,26 +70,35 @@
                     <%= users[i].username %> 
                   </a>
             </div>
-            <div style="margin-left:10px">
-              <% if (!(currentUser.userConnections.map((e) => {return e.connectionId}).indexOf(users[i].id) > -1)) {%>
-       
-                <form action="/users/<%= currentUser.id %>/<%= users[i].id%>/update?_method=PUT" method="POST">
-                  <div class="form-group">
-                      <input class="btn btn-primary" type="submit" value="Add to Network"/>
-                  </div>
-                </form>
+          </td>
+ 
 
+     
+              <% if (!(currentUser.userConnections.map((e) => {return e.connectionId}).indexOf(users[i].id) > -1)) {%>
+                <th style="color:red"> Out</th>
+                <td>
+                <form action="/users/<%= currentUser.id %>/<%= users[i].id%>/update?_method=PUT" method="POST">
+                    <button type="submit" style="border:none; background: none;">
+                      <svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm4.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
+                      </svg>
+                    </button>
+                </form>
+              </td>
               <% } %>
 
               <% if ((currentUser.userConnections.map((e) => {return e.connectionId}).indexOf(users[i].id) > -1)) {%>
-       
-                <a class="btn btn-dark" href="/users/<%= users[i].id %>"> 
-                     Message
+                <th style="color:green"> In</th>
+                <td>
+                <a class="btn"  style="border:none; background: none;" href="/users/<%= users[i].id %>"> 
+                  <svg width="50px" height="50px" viewBox="0 0 16 16" class="bi bi-chat-left-dots" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v11.586l2-2A2 2 0 0 1 4.414 11H14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                    <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                  </svg>
                 </a>
-
+              </td>
               <% } %>
-            </div>
-        </td>
       </tr>
         <% } %>
 
