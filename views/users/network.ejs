@@ -21,10 +21,7 @@
         <div>
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active mr-sm-2">
-              <a href="/users/<%= currentUser.id %>/edit" class="btn btn-light" >Edit Profile  </a>
-            </li>
-            <li class="nav-item active mr-sm-2">
-              <a href="#" class="btn btn-light" >Settings  </a>
+                <a href="/users" class="btn btn-light" > Home </a>
             </li>
             <li class="nav-item">
               <form action="/sessions?_method=DELETE" method="POST">
@@ -56,36 +53,20 @@
     <table id="connections" style="width:90%;">
     <thead><th></th></thead>
   <% for (let i = 0; i < users.length; i++) { %>
-      <% if (users[i].id != currentUser.id) { %>
+      <% if (currentUser.userConnections.map((e) => {return e.connectionId}).indexOf(users[i].id) > -1) { %>
       <tr style="border-top: 1px solid grey; width:90%; ">
-        <td style="width:100%; margin:5px;  display:flex; flex-direction: row; justify-content: center; align-items:center">      
-          <img class="img img-fluid" style="width:100px; height:100px; border-radius:50px; margin-top:10px" src="<%= users[i].img %>" onerror=this.src="img/people.png">
-            <div>  <%= users[i].firstName %> | </div>
-              <div style="margin-left:5px"> <%= users[i].lastName %> |  </div>
-            <div style="margin-left:5px"> 
-                  <a href="/users/<%= users[i].id %>"> 
-                    <%= users[i].username %> 
-                  </a>
-            </div>
-            <div style="margin-left:10px">
-              <% if (!(currentUser.userConnections.map((e) => {return e.connectionId}).indexOf(users[i].id) > -1)) {%>
-       
-                <form action="/users/<%= currentUser.id %>/<%= users[i].id%>/update?_method=PUT" method="POST">
-                  <div class="form-group">
-                      <input class="btn btn-primary" type="submit" value="Add to Network"/>
-                  </div>
-                </form>
-
-              <% } %>
-
-              <% if ((currentUser.userConnections.map((e) => {return e.connectionId}).indexOf(users[i].id) > -1)) {%>
-       
-                <a class="btn btn-dark" href="/users/<%= users[i].id %>"> 
-                     Message
-                </a>
-
-              <% } %>
-            </div>
+    <td style="width:100%; margin:5px;  display:flex; flex-direction: row; justify-content: center; align-items:center">      
+      <img class="img img-fluid" style="width:100px; height:100px; border-radius:50px; margin-top:10px" src="<%= users[i].img %>" onerror=this.src="https://www.materialui.co/materialIcons/social/person_grey_192x192.png">
+         <div>  <%= users[i].firstName %> | </div>
+          <div style="margin-left:5px"> <%= users[i].lastName %>  </div>
+        <div style="margin-left:5px"> 
+              <a href="/users/<%= users[i].id %>"> 
+                <%= users[i].username %> 
+              </a>
+        </div>
+        <div style="margin-left:10px">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Message</button>
+        </div>
         </td>
       </tr>
         <% } %>

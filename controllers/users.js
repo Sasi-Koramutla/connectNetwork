@@ -17,13 +17,14 @@ const isAuthenticated = (req, res, next) => {
       res.redirect('/sessions/new');
     }
   };
-
+//new user
 usersRouter.get("/new", (req, res) => {
     res.render("users/new.ejs", {
         currentUser: req.session.currentUser
     });
 });
 
+//post for user creation
 usersRouter.post("/",(req,res) => {
     // Hash the password before putting it in the database
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
@@ -56,6 +57,16 @@ usersRouter.get('/:id/edit', isAuthenticated, (req, res)=>{
     })
   });
 
+//get all users
+usersRouter.get('/', isAuthenticated, (req, res)=>{
+  User.findOne({ username: req.session.currentUser.username }, (err, foundUser) => {
+            req.session.currentUser = foundUser;
+            allUsers.find({},(err , users) =>{
+                res.render("index.ejs",{currentUser: foundUser,
+                    users:users});
+            });
+      });
+});
 
 // update
 usersRouter.put('/:id', isAuthenticated, (req, res)=>{
@@ -66,6 +77,17 @@ usersRouter.put('/:id', isAuthenticated, (req, res)=>{
         });
     });
     });
+
+// update connections
+usersRouter.put('/:id/:connectionId/update', isAuthenticated, (req, res)=>{
+  User.findByIdAndUpdate(req.params.id, {$push:{userConnections:{connectionId:req.params.connectionId}}}, { new: true}, (err, updatedModel)=> {
+    console.log(err); 
+    console.log(updatedModel.userConnections); 
+    });
+  res.redirect(`../../${req.params.connectionId}`);
+  });
+
+
   
   // ROUTES
   // index

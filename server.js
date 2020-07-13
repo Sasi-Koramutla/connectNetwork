@@ -27,7 +27,7 @@ app.use(
   );
   
 // mongoose connection logic
-  mongoose.connect(mongodbURI, { useNewUrlParser: true}, (err, res) => {
+  mongoose.connect(mongodbURI, { useNewUrlParser: true, useFindAndModify: false}, (err, res) => {
     if (err) {
     console.log ('ERROR connecting to: ' + mongodbURI + '. ' + err);
     } else {
