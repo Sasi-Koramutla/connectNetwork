@@ -87,7 +87,8 @@ usersRouter.put('/:id/:connectionId/update', isAuthenticated, (req, res)=>{
     console.log(err); 
     console.log(updatedModel.userConnections); 
     });
-  res.redirect(`../../${req.params.connectionId}`);
+  //res.redirect(`../../${req.params.connectionId}`);
+  res.redirect(`../../`);
   });
 
 
