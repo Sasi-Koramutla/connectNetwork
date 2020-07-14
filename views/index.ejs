@@ -24,7 +24,7 @@
               <a href="/users/<%= currentUser.id %>/edit" class="btn btn-light" >Edit Profile  </a>
             </li>
             <li class="nav-item active mr-sm-2">
-              <a href="#" class="btn btn-light" >Settings  </a>
+              <a href="/users/<%= currentUser.id %>/inbox" class="btn btn-light" >Inbox</a>
             </li>
             <li class="nav-item">
               <form action="/sessions?_method=DELETE" method="POST">

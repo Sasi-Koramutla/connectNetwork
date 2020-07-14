@@ -12,7 +12,7 @@
       
       <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
         <div><h2 style="color:white;">
-          Howdy <%= currentUser.firstName %>!
+          Howdy <%= user.firstName %>!
          </h2>
         </div>
         <div>
@@ -31,31 +31,20 @@
     </nav>
     <div class="jumbotron" style="align-items:center;">
      <div class="row" style="text-align:center; display:flex; flex-direction: column; align-items:center; justify-content: center; margin-bottom:25px;">
-      <img class="img img-fluid" style="width:100px; height:100px; border-radius:50px;" src="<%= user.img %>" onerror=this.src="img/people.png">
-       <div class="col-md-auto"><h1><%= user.firstName %> | <%= user.lastName %></h1></div>
+       <div class="col-md-auto"><h1><%= user.firstName %>'s Inbox</h1></div>
        <div class="col col-lg-4"><h4></h4></div>
-     </div>
-     <div class="row">
-      <form action="/users/messages/<%= currentUser.username %>/<%= user.id %>" method="POST" style="width:50%; margin-left:25%">
-        <div class="form-group">
-            <input class="form-control" type="text" placeholder="Subject" name="subject">
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="Message" name= "body" rows="3"></textarea>
-        </div>
-        <div class="form-group">
-            <input style="width:50%;margin-left:25%" class="form-control btn btn-primary" type="submit" value="Send"/>
-        </div>
-      </form>
      </div>
     </div>
   
  <div class="container">
 
   <div class="row" id="message-table">
-    <% if((messages.map((e) => {return e.from}).indexOf(currentUser.username) > -1)){%>
+    <% if((messages.map((e) => {return e.to}).indexOf(user.id) > -1)){%>
     <table class="table table-hover">
       <thead>
+        <th>
+          From
+        </th>
         <th>
           Subject
         </th>
@@ -67,8 +56,11 @@
         </th>
       </thead>
       <% for (let i = messages.length-1; i >=0; i-- ) {%>
-        <% if(messages[i].from == currentUser.username && messages[i].to == user.id) {%>
+        <% if(messages[i].to == user.id) {%>
         <tr>
+          <td>
+            <%= messages[i].from%>
+            </td>
           <td>
             <%= messages[i].subject%>
             </td>
@@ -76,13 +68,12 @@
             <%= messages[i].body%>
           </td>
           <td>
-            <form action="/users/messages/<%= messages[i].id%>/<%= messages[i].to%>?_method=DELETE" method="POST">
+            <form action="/users/inbox/<%= messages[i].id%>/<%= messages[i].to%>?_method=DELETE" method="POST">
                 <button type="submit" style="border:none; background: none;">
                   <svg width="20px" height="20px" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
                   </svg>
                 </button>
-        
             </form>
           </td>  
         </tr>

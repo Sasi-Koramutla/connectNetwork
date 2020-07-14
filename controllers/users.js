@@ -32,8 +32,11 @@ usersRouter.post("/",(req,res) => {
     User.create(req.body, (err, createdUser) => {
         console.log('user is created', createdUser);
         console.log(err);
+        if (err.code == 11000)
+        res.render("login.ejs",{message:"User already exists!"});
         //res.send("successful");
-        res.render("login.ejs");
+        else
+        res.render("login.ejs", {message:"Signup is Complete."});
     });
 });
 
@@ -56,9 +59,19 @@ usersRouter.get('/:id/edit', isAuthenticated, (req, res)=>{
         res.render('edit.ejs', {
           user: foundUser, 
           currentUser: req.session.currentUser
-        })
-    })
+        });
+    });
   });
+
+// inbox 
+usersRouter.get('/:id/inbox', isAuthenticated, (req, res)=>{
+  User.findById(req.params.id, (err, foundUser)=>{ 
+    Message.find({}, (err, messages) =>{
+      //console.log(messages);
+      res.render("users/messages.ejs", {user: foundUser, currentUser: req.session.currentUser, messages:messages});
+    });
+  });
+});
 
 //get all users
 usersRouter.get('/', isAuthenticated, (req, res)=>{
@@ -79,7 +92,7 @@ usersRouter.put('/:id', isAuthenticated, (req, res)=>{
                 users:users});
         });
     });
-    });
+});
 
 // update connections
 usersRouter.put('/:id/:connectionId/update', isAuthenticated, (req, res)=>{
@@ -94,7 +107,7 @@ usersRouter.put('/:id/:connectionId/update', isAuthenticated, (req, res)=>{
 
   
 //post messages
-usersRouter.post("/messages/:from/:to",(req,res) => {
+usersRouter.post("/messages/:from/:to", isAuthenticated, (req,res) => {
 req.body.from = req.params.from;
 req.body.to = req.params.to;
   Message.create(req.body, (err, createdMessage) => {
@@ -105,9 +118,17 @@ req.body.to = req.params.to;
   });
 });
 
+//delete messages
 usersRouter.delete('/messages/:id/:to', isAuthenticated, (req, res) => {
   Message.findByIdAndRemove(req.params.id, { useFindAndModify: false }, (err, data)=>{
     res.redirect(`/users/${req.params.to}`);
+  });
+});
+
+//delete inbox messages
+usersRouter.delete('/inbox/:id/:to', isAuthenticated, (req, res) => {
+  Message.findByIdAndRemove(req.params.id, { useFindAndModify: false }, (err, data)=>{
+    res.redirect(`/users/${req.params.to}/inbox`);
   });
 });
 

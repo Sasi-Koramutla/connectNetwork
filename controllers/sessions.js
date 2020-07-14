@@ -17,7 +17,7 @@ sessionRouter.post('/', (req, res) => {
     User.findOne({ username: req.body.username }, (err, foundUser) => {
         if (!foundUser) {
             // Let the client know if no user exists with that username
-            res.send('<a href="/">Sorry, user not found.</a>');
+            res.render("sessions/error.ejs", {message:"User does not Exist"});
         } else {
             // Check the found user's password agains input password
             if (bcrypt.compareSync(req.body.password, foundUser.password)) {
@@ -30,7 +30,7 @@ sessionRouter.post('/', (req, res) => {
 
             } else {
                 // Let the client know if the password was incorrect
-                res.send('<a href="/">Incorrect password.</a>');
+                res.render("sessions/error.ejs", {message:"Incorrect Password"});
             }
         }
     });

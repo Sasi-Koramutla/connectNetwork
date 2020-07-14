@@ -11,27 +11,8 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="collapse navbar-collapse" id="navbarSupportedContent" style="display: flex; flex-direction: row; justify-content: space-between;">
         <div><h2 style="color:white;">
-          Login to Connect!
+          Howdy!
          </h1>
-        </div>
-        <div>
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active mr-sm-2">
-              <form action="/sessions" method="POST"><div style="display: flex; flex-direction: row; align-items: flex-end; flex-wrap: wrap;">
-                <div class= "mr-sm-2" style="display: flex; flex-direction: column; align-items: flex-start; flex-wrap: wrap;">
-                  <label style="color:white;"> Username </label> 
-                  <input class="form-control" type="text" name="username"/>
-                </div>
-                <div class= "mr-sm-2" style="display: flex; flex-direction: column; align-items: flex-start; flex-wrap: wrap;">
-                  <label style="color:white;"> Password </label> 
-                  <input class="form-control" type="password" name="password"/>
-                </div>
-            
-                <input type="submit" value="Log in" class="btn btn-light"/>
-              </div>
-              </form> 
-            </li>
-          </ul>
         </div>
       </div>
       </nav>
@@ -43,25 +24,9 @@
         </div>
   
        <div class="row" style="text-align:center; margin-left:2%">
-        <h1 style="font-size:40px;"><span class="row"><div style="color:#007bff;">Y</div>
-                              <div style="color:red">o</div>
-                              <div style="color:green">u</div>
-                              <div>C</div>
-                              <div style="color:Orange">o</div>
-                              <div style="color:green">n</div>
-                              <div style="color:red">n</div>
-                              <div style="color:#007bff;">e</div>
-                              <div style="color:purple;">c</div>
-                              <div >t</div>
-                              </span></h1>
+        <h1 style="font-size:40px; color:red;"><a href="/" style="color:red;"> <%= message%> </a></h1>
   
        </div>
       </div>
-  
-
-    <div>
-        <h1 style="align-items:center;display: flex; flex-direction: row; justify-content: center;color:red;"><a href="/" style="color:red;"><%=message%></a></h1>
-    </div>
-
  </body>
 </html>
