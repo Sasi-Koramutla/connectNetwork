@@ -29,15 +29,24 @@ usersRouter.get("/new", (req, res) => {
 usersRouter.post("/",(req,res) => {
     // Hash the password before putting it in the database
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    User.create(req.body, (err, createdUser) => {
-        console.log('user is created', createdUser);
-        console.log(err);
-        if (err)
-        res.render("login.ejs",{message:"User already exists!"});
-        //res.send("successful");
-        else
-        res.render("login.ejs", {message:"Signup is Complete."});
+    allUsers.find({username:req.body.username}, (err, foundUser) => {
+     if(foundUser)
+     res.render("login.ejs", {message:"User Already Exists!"});
+
+      else
+      {
+        User.create(req.body, (err, createdUser) => {
+          console.log('user is created', createdUser);
+          console.log(err);
+         /* if (err)
+          res.render("login.ejs",{message:"User already exists!"});
+          //res.send("successful");
+          else */
+          res.render("login.ejs", {message:"Signup is Complete."});
+        });
+      }
     });
+
 });
 
 usersRouter.get("/:id", isAuthenticated, (req, res) => {
