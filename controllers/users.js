@@ -32,7 +32,7 @@ usersRouter.post("/",(req,res) => {
     User.create(req.body, (err, createdUser) => {
         console.log('user is created', createdUser);
         console.log(err);
-        if (err.code == 11000)
+        if (err)
         res.render("login.ejs",{message:"User already exists!"});
         //res.send("successful");
         else

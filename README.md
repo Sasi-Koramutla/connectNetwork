@@ -17,14 +17,14 @@ YouConnect can be used to connect with various networks, search for and communic
 
 ## User Stories
 YouConnect is a full stack application built using **Node.js, Mongoose, Express, EJS and Bootstrap**. The Application has the following workflows: 
-  - **Sign Up** New users can sign up in the application
-  - **Authorization/Login** Only authorized users can login into the application
-  - **Find** After login, users can fing the connections by name/email search
-  - **Connect** Users can form one's own network from the connections
-  - **View Connections** Users can view the profiles of the connections
-  - **Send Messages** Users can send messages to their connections
-  - **Receive Messages** Users can receive messages from their connections
-  - **Edit Profile** Users can edit their profiles
+  - **Sign Up**>> New users can sign up in the application
+  - **Authorization/Login**>> Only authorized users can login into the application
+  - **Find**>> After login, users can fing the connections by name/email search
+  - **Connect**>> Users can form one's own network from the connections
+  - **View Connections**>> Users can view the profiles of the connections
+  - **Send Messages**>> Users can send messages to their connections
+  - **Receive Messages**>> Users can receive messages from their connections
+  - **Edit Profile**>> Users can edit their profiles
 
 ## Future Development
  * Searching connections by zipcode/Location
