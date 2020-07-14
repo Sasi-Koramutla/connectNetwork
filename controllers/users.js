@@ -29,7 +29,7 @@ usersRouter.get("/new", (req, res) => {
 usersRouter.post("/",(req,res) => {
     // Hash the password before putting it in the database
     req.body.password = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10));
-    allUsers.find({username:req.body.username}, (err, foundUser) => {
+    allUsers.findOne({username:req.body.username}, (err, foundUser) => {
      if(foundUser)
      res.render("login.ejs", {message:"User Already Exists!"});
 
@@ -124,6 +124,13 @@ req.body.to = req.params.to;
       console.log(err);
       //res.send("successful");
       res.redirect(`/users/${req.params.to}`);
+  });
+});
+
+//delete user
+usersRouter.delete('/:id/', isAuthenticated, (req, res) => {
+  User.findByIdAndRemove(req.params.id, { useFindAndModify: false }, (err, data)=>{
+    res.redirect(`/`);
   });
 });
 
